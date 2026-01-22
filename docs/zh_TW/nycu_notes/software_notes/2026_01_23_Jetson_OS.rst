@@ -1,0 +1,137 @@
+.. _2026_01_23_Jetson_OS:
+
+2026-01-23 Jetson OS 安裝紀錄
+=============================
+
+這份文件記錄了在 2026-01-20 ~ 2026-01-22 之間，為 Jetson Orin NX 灌系統的過程與踩坑紀錄。
+
+
+前情提要
+--------
+
+ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國的國安規定，學校難以買大陸公司與工廠產的資通訊產品。所以我們退而求其次，使用了 Nvidia 的 Jetson Orin Nano Super Developer Kit 並手動換上 Jetson Orin NX 16GB。
+
+.. dropdown:: 硬體參考資料
+
+    基於以下原因：
+
+    *   Jetson Orin Nano Super DevKit 的載板（Carrier Board）與 Jetson Orin NX 相容： `Nvidia 論壇 <https://forums.developer.nvidia.com/t/original-nvidia-board-for-orin-nx/285333>`_
+    *   該載板的大小是 100 x 79 x 21mm： `Carrier Board Spec <https://developer.nvidia.com/embedded/downloads#?search=Jetson%20Orin%20Nano%20Developer%20Kit%20Carrier%20Board%20Specification>`_
+    *   reComputer J4012 具有類似的佈局與尺寸： `reComputer 開源硬體 Repo <https://github.com/Seeed-Studio/OSHW-Jetson-Series/tree/main/reComputer%20Jetson%20carrier%20board/reComputer%20J401>`_
+
+    我們購買了這個替代方案：
+
+    *   Jetson Orin NX 16GB SOM (USD $699): `Arrow <https://www.arrow.com/en/products/900-13767-0000-001/nvidia>`_
+    *   Jetson Orin Nano Super DevKit (USD $249): `Arrow <https://www.arrow.com/en/products/945-13766-0000-000/nvidia>`_
+    *   WD威騰 BLACK 黑標 SN7100 500G Gen4 NVMe SSD固態硬碟 (WDS500G4X0E) (TWD $1460 :math:`\approx` USD $49)
+    *   裁一片 PTM7950 0.25mm 相變導熱膠，大小約 22 x 20mm。原尺寸 40 x 80mm (TWD $390 :math:`\approx` USD $13): `Shopee <https://shopee.tw/user/purchase/order/222510203299548?type=3>`_
+
+操作步驟
+--------
+
+前置作業
+^^^^^^^^
+1.  準備好 Host OS
+
+    *   請查看 `SDK Manager 下載頁面 <https://developer.nvidia.com/sdk-manager>`_ 的相容性列表。
+    *   Host OS 的選擇：
+
+        *   Ubuntu 20.04、22.04 與 24.04 及 Windows 10/11 應該都可以。
+        *   **以下我們用 Windows 11 做說明。**
+
+    *   Host OS 的安裝：由於 Toddlerbot 的軟體開發、訓練和復現，可以全部在 Jetson Orin NX 上完成，不需要 Host 上裝 Nvidia SDK。所以你可以考慮
+
+        *   使用一個有 32GB 空間的 Live USB
+        *   或者有本機系統也可以
+        *   不建議使用虛擬機，因為 USB 穿透似乎會有重列舉的延遲問題，會讓 SDK Manager 認為連線不穩、拒絕前往下一步。
+
+2.  下載與安裝 SDK Manager
+
+    *   `SDK Manager 下載頁面 <https://developer.nvidia.com/sdk-manager>`_。你會需要辦一個帳號，它等一下也會用於登入 SDK Manager
+    *   安裝過程請參考 `Nvidia 官網的安裝說明 <https://docs.nvidia.com/sdk-manager/download-run-sdkm/index.html#windows-users>`_
+
+3.  請準備好以下物品
+
+    *   一個穩定的 USB Type-C 線。通常較新和粗的較好
+    *   一個顯示器與 DP 線
+    *   一個已經組裝好的 DevKit，上有 GPU & SSD
+    *   一個 USB 鍵盤與一個 USB 滑鼠，插上 DevKit
+    *   一條杜邦線母對母
+
+灌系統
+^^^^^^
+
+.. dropdown:: 參考
+
+    *   本節意圖取代 :ref:`jetson_orin` 的 Flash the System 一節 Step 1~7。
+
+        *   username & password 是在 sdkmanager 的 ui 中設定的，而非啟動後的 OS 中
+        *   app partition 會自動佔最大空間
+        *   DevKit 有內建 Wifi Antenna，不用額外安裝
+
+    *   本步驟摘要了 Nvidia 官方文件 `Install Jetson Software with SDK Manager <https://docs.nvidia.com/sdk-manager/install-with-sdkm-jetson/index.html>`_ 關於灌系統的說明
+
+1.  DevKit 的連線：我們要讓它進入 Recovery Mode
+
+    1.  把 FC REC & GND 相接（可用母母杜邦線）
+    2.  把 DevKit 的 Type-C 連到 Host，再插電源
+
+        *   順序很重要！
+        *   如果有正確進入 Recovery Mode，風扇似乎就不會旋轉了
+        *   請取夠穩定的 USB 線，並且把 Host 與 DevKit 放在一個穩定的平面上
+
+    3. 把顯示器接到 Devkit 上，方便裝好後參考
+    4. 然後裝 `Driver <https://developer.download.nvidia.com/sdkmanager/resources/help/index.html#apx-driver>`_ 讓它可以讀到 USB
+
+2.  在軟體 STEP 01，勾選 Jetson → 勾 Target Harware 不勾 Host → 點 🗘 來偵測（或手動選）→ JetPack ≥ 6.1
+
+3.  在軟體 STEP 02，全選「Jetson Linux」、「Jetson Runtime Components」、「Jetson Platform Services」 → 勾 I accept… → Continue
+
+4.  在軟體 STEP 03，下載完後的安裝階段，可能會有一些彈出式視窗
+
+    1.  如果出現 Recovery Mode Setup，就是前面「DevKit 的連線」沒有做好，重新做一次，並選擇 Manual
+    2.  第二個窗選 Pre-config。我設定的帳號密碼是 ``user`` 跟 ``password`` 。儲存裝置選 NVMe
+    3.  如果連線不穩定，再重做一次 DevKit 的連線
+    4.  如果中間有些奇怪的原因中斷（或安裝階段的進度卡很久），可以停止後從 STEP 01 重新開始。重來時，已完成的部分會自動跳過，而你可以 skip 掉空間不足的警告
+
+5.  如果你在圖形化界面，沒有鍵盤，可以
+    *   登入界面：直接按右上角的 Accessiblity 工具打開虛擬鍵盤
+    *   登入後：
+        *   請從右上角進入桌面環境設定，然後打開 Accessiblity 的 Show Menu，便能以上述方式開虛擬鍵盤——這個鍵盤可用於系統視窗（Wifi & Root 密碼等）
+        *   另外從 Applications → Onboard 可以打開一個更複雜的虛擬鍵盤，用於輸入 Ctrl、Alt、Shift、Arrows 等特殊按鍵，不過它不能用於系統視窗。
+
+SSH 與後續 Setup
+^^^^^^^^^^^^^^^^
+
+請從 :ref:`jetson_orin` 的 Flash the System 第 8 步驟開始，繼續進行 SSH 連線、RT Kernel 安裝、Software Setup 與 Additional Packages 安裝。本節僅作補充說明或額外建議。
+
+*   **連 ssh**
+
+    1.  **同區域網**：將 devkit & 你的電腦連到同一個 wifi 下（devkit）。Wifi / Ethernet 都可
+
+    2.  **建立 ssh 連線**
+
+        *   使用 ``ifconfig`` 或 ``ip addr`` 查看 devkit 在 Wifi / Ethernet 界面上的 ip address，然後 ``ssh ${username}@${ip address}`` 。這邊的 ``${username}`` 與密碼是我們剛才在 sdk manager 設定的（如 ``${username}`` = ``user``）
+        *   (Alternative) Hack: 嘗試直接 ``ssh ${username}@ubuntu.local``。由於 devkit 預設的 hostname 是 ``ubuntu``，運氣好可以直接連
+        *   (Alternative 2) 使用 ``arp -a`` 來查看目前區域網路中的其他裝置 IP Addr，並且對有可能的 ip address 依序執行 ``ssh ${username}@${ip address}``
+
+    3.  **（額外建議）改 hostname**：為了方便區分，讓我們使用 ``sudo hostnamectl hostname ${newname}`` 把 devkit 的 hostname 改掉（如 ``${newname}`` = ``devkit``）。這樣下次重開機開始，我們就能 ``ssh ${username}@${hostname}.local`` 了。
+
+    4.  **（額外建議）裝 oh-my-zsh**：它提供了方便的自動補全功能，在打 terminal 的時候更輕鬆
+
+        *   裝 zsh：``sudo apt install zsh``
+        *   裝 oh-my-zsh：``sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"``
+        *   設為預設 shell：在「Do you want to change your default shell to zsh?」時選擇 Yes。或者也可以執行 ``chsh -s "$(which zsh)"`` 來設定。
+        *   選個好主題：``omz theme set gallois`` 是一個能提供執行時間、目前 git branch、git 狀態、上個程式正常退出與否，與目前資料夾路徑的一個好主題。
+
+*   **裝專案本 Repo**
+
+    *   裝 JetPack & Pytorch：
+
+        *   如果安裝完執行測試 code 發現 torch failed，除了原文檔說明的 cuSPARSELt 外，大概是 cuda-toolkit 沒有裝（Note：很奇怪，它沒有在裝系統時隨 Jetpack 自動裝好），使得缺少 ``libcublas.so.*[0-9]`` 。請執行 ``sudo apt install cuda-toolkit``
+            
+            .. image:: ../../../_static/torch_failed_during_test_for_setup.png
+
+*   **裝 Additional Packages**
+
+    *   最後面在 “Add TensorRT to Python path:” 的時候，如果沒有 ``$CONDA_PREFIX`` 這個變數，就直接去 ``~/miniforge3/envs/toddlerbot`` 尋找
