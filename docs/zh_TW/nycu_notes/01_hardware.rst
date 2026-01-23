@@ -67,3 +67,9 @@ Q: 要把 Dynamixel 馬達插到筆電上設定，要怎麽供電？
 *   **問題**：要在設定馬達與組裝時為馬達供電。
 *   **解決方案**：使用 **U2D2 Power Hub**。將 U2D2 插在 Power Hub 上，並使用變壓器（如 iMax B6 Mini 隨附的）連接至 Power Hub 供電。
 
+.. toctree::
+   :maxdepth: 1
+   :caption: 詳細組裝紀錄
+
+   hardware_notes/2026_01_20_Assembly
+

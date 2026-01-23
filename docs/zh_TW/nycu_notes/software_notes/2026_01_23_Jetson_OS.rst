@@ -6,26 +6,6 @@
 這份文件記錄了在 2026-01-20 ~ 2026-01-22 之間，為 Jetson Orin NX 灌系統的過程與踩坑紀錄。
 
 
-前情提要
---------
-
-ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國的國安規定，學校難以買大陸公司與工廠產的資通訊產品。所以我們退而求其次，使用了 Nvidia 的 Jetson Orin Nano Super Developer Kit 並手動換上 Jetson Orin NX 16GB。
-
-.. dropdown:: 硬體參考資料
-
-    基於以下原因：
-
-    *   Jetson Orin Nano Super DevKit 的載板（Carrier Board）與 Jetson Orin NX 相容： `Nvidia 論壇 <https://forums.developer.nvidia.com/t/original-nvidia-board-for-orin-nx/285333>`_
-    *   該載板的大小是 100 x 79 x 21mm： `Carrier Board Spec <https://developer.nvidia.com/embedded/downloads#?search=Jetson%20Orin%20Nano%20Developer%20Kit%20Carrier%20Board%20Specification>`_
-    *   reComputer J4012 具有類似的佈局與尺寸： `reComputer 開源硬體 Repo <https://github.com/Seeed-Studio/OSHW-Jetson-Series/tree/main/reComputer%20Jetson%20carrier%20board/reComputer%20J401>`_
-
-    我們購買了這個替代方案：
-
-    *   Jetson Orin NX 16GB SOM (USD $699): `Arrow <https://www.arrow.com/en/products/900-13767-0000-001/nvidia>`_
-    *   Jetson Orin Nano Super DevKit (USD $249): `Arrow <https://www.arrow.com/en/products/945-13766-0000-000/nvidia>`_
-    *   WD威騰 BLACK 黑標 SN7100 500G Gen4 NVMe SSD固態硬碟 (WDS500G4X0E) (TWD $1460 :math:`\approx` USD $49)
-    *   裁一片 PTM7950 0.25mm 相變導熱膠，大小約 22 x 20mm。原尺寸 40 x 80mm (TWD $390 :math:`\approx` USD $13): `Shopee <https://shopee.tw/user/purchase/order/222510203299548?type=3>`_
-
 操作步驟
 --------
 
@@ -54,9 +34,10 @@ ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國�
 
     *   一個穩定的 USB Type-C 線。通常較新和粗的較好
     *   一個顯示器與 DP 線
-    *   一個已經組裝好的 DevKit，上有 GPU & SSD
+    *   一個已經組裝好的 DevKit，上有 GPU & SSD。組裝請參考 :ref:`2026_01_23_Jetson_Assembly`
     *   一個 USB 鍵盤與一個 USB 滑鼠，插上 DevKit
     *   一條杜邦線母對母
+
 
 灌系統
 ^^^^^^
@@ -99,6 +80,7 @@ ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國�
     *   登入後：
         *   請從右上角進入桌面環境設定，然後打開 Accessiblity 的 Show Menu，便能以上述方式開虛擬鍵盤——這個鍵盤可用於系統視窗（Wifi & Root 密碼等）
         *   另外從 Applications → Onboard 可以打開一個更複雜的虛擬鍵盤，用於輸入 Ctrl、Alt、Shift、Arrows 等特殊按鍵，不過它不能用於系統視窗。
+
 
 SSH 與後續 Setup
 ^^^^^^^^^^^^^^^^
