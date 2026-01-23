@@ -49,5 +49,6 @@ check out the following sections:
    sections/04_useful_tools
    sections/05_tips_and_tricks
    sections/06_api
-   sections/07_nycu_notes
+   nycu_notes/index
+
    sections/08_zh_TW

@@ -1,0 +1,115 @@
+.. _2026_01_23_Jetson_OS_en:
+
+2026-01-23 Jetson OS Installation Log
+=====================================
+
+.. warning::
+   This page is translated by LLM and may contain some inaccuracies.
+   `中文版 (Chinese Version) <../../zh_TW/nycu_notes/software_notes/2026_01_23_Jetson_OS.html>`_
+
+This document records the process and pitfalls of installing the OS on Jetson Orin NX between 2026-01-20 ~ 2026-01-22.
+
+Steps
+-----
+
+Prerequisites
+^^^^^^^^^^^^^
+
+1.  Prepare Host OS
+
+    *   Check usage compatibility on `SDK Manager Download Page <https://developer.nvidia.com/sdk-manager>`_.
+    *   Ubuntu 20.04, 22.04, 24.04 and Windows 10/11 should work.
+    *   **We configure with Windows 11 below.**
+    *   Since all development can be done on the Jetson, you don't need Nvidia SDK on the Host.
+
+        *   Live USB (32GB) is an option.
+        *   Native OS is preferred.
+        *   VM is **not recommended** due to USB passthrough latency causing connection issues.
+
+2.  Download and Install SDK Manager
+
+    *   Download from `here <https://developer.nvidia.com/sdk-manager>`_. An account is required.
+    *   Follow `Nvidia official guide <https://docs.nvidia.com/sdk-manager/download-run-sdkm/index.html#windows-users>`_.
+
+3.  Prepare Items
+
+    *   Stable USB Type-C cable.
+    *   Monitor and DP cable.
+    *   Assembled DevKit with GPU & SSD. Refer to :ref:`2026_01_23_Jetson_Assembly_en`.
+    *   USB Keyboard and Mouse connected to DevKit.
+    *   Female-to-Female jumper wire.
+
+Flash System
+^^^^^^^^^^^^
+
+.. dropdown:: References
+
+    *   This section intends to replace Steps 1~7 of "Flash the System" in :ref:`jetson_orin`.
+
+        *   Username & password are set in SDK Manager UI.
+        *   App partition automatically takes max space.
+        *   DevKit has built-in Wifi Antenna.
+
+    *   Summarized from `Install Jetson Software with SDK Manager <https://docs.nvidia.com/sdk-manager/install-with-sdkm-jetson/index.html>`_.
+
+1.  **DevKit Connection (Recovery Mode)**
+
+    1.  Short **FC REC** and **GND** (jumper wire).
+    2.  Connect Type-C to Host **first**, then plug in power.
+
+        *   Order matters! Fan should **not** spin if in Recovery Mode.
+
+    3.  Connect Monitor.
+    4.  Install `Driver <https://developer.download.nvidia.com/sdkmanager/resources/help/index.html#apx-driver>`_ if needed.
+
+2.  **SDK Manager Step 01**: Check Jetson -> Check Target Hardware (Uncheck Host) -> Refresh/Select Manual -> JetPack >= 6.1.
+
+3.  **SDK Manager Step 02**: Select All (Jetson Linux, Runtime, Platform Services) -> Accept -> Continue.
+
+4.  **SDK Manager Step 03**: Installation.
+
+    1.  If "Recovery Mode Setup" pops up, check connections and retry Manual.
+    2.  Select **Pre-config**. Storage: **NVMe**. Set username/password (e.g., ``user``/``password``).
+    3.  If connection unstable, retry connection.
+    4.  If stalled/interrupted, stop and restart from Step 01 (completed parts will skip).
+
+5.  **Virtual Keyboard (if no physical keyboard)**
+
+    *   Login Screen: Top-right Accessibility icon -> On Screen Keyboard.
+    *   After Login: Settings -> Accessibility -> Show Menu -> Screen Keyboard.
+    *   Or Applications -> Onboard (more keys, but doesn't work on system prompts).
+
+SSH and Subsequent Setup
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Continue from Step 8 of "Flash the System" in :ref:`jetson_orin` (SSH, RT Kernel, Software Setup, Additional Packages).
+
+*   **SSH Connection**
+
+    1.  Same LAN (Wifi/Ethernet).
+    2.  Connect:
+
+        *   Check IP with ``ifconfig`` -> ``ssh user@<ip>``.
+        *   (Hack) Try ``ssh user@ubuntu.local``.
+        *   (Hack 2) Use ``arp -a`` to find IP.
+
+    3.  **(Recommended) Change Hostname**: ``sudo hostnamectl hostname <newname>`` (e.g., ``toddlerbot``). Then you can use ``ssh user@toddlerbot.local``.
+    4.  **(Recommended) Oh-My-Zsh**:
+
+        *   ``sudo apt install zsh``
+        *   Install oh-my-zsh script.
+        *   ``chsh -s $(which zsh)``
+        *   Theme: ``gallois``
+
+*   **Install Project Repo**
+
+    *   **JetPack & Pytorch**:
+
+        *   If torch fails during test, ``cuda-toolkit`` might be missing (missing ``libcublas.so``).
+        *   Fix: ``sudo apt install cuda-toolkit``.
+            
+            .. image:: ../../_static/torch_failed_during_test_for_setup.png
+
+*   **Additional Packages**
+
+    *   For TensorRT path: check ``~/miniforge3/envs/toddlerbot`` if ``$CONDA_PREFIX`` is missing.
