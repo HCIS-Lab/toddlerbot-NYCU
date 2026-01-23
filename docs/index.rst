@@ -8,8 +8,6 @@ ToddlerBot
 
 ToddlerBot is a low-cost, open-source humanoid robot platform designed for scalable policy learning and research in robotics and AI.
 
-`中文版文檔 <zh_TW/index.html>`_
-
 If you want to know more about ToddlerBot, here are some useful links:
 
 `Paper <https://arxiv.org/abs/2502.00893>`__  |  
