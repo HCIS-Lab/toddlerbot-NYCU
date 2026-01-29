@@ -3,11 +3,7 @@
 硬體筆記
 =========================
 
-.. warning::
-
-   本頁面由 LLM 輔助生成，尚未經過人工審核，請謹慎使用。
-
-本章節包含馬達設定、組裝過程中的常見問題排除 (Troubleshooting)。
+本章節包含馬達設定、組裝過程中的常見問題排除。
 
 Q: 在組裝之前，馬達要先做設定嗎？
 ----------------------------
@@ -16,7 +12,7 @@ Q: 在組裝之前，馬達要先做設定嗎？
 
 操作流程概覽如下：
 
-1.  安裝 `Dynamixel Wizard 2.0 <https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/>`，然後把馬達連結
+1.  安裝 `Dynamixel Wizard 2.0 <https://emanual.robotis.com/docs/en/software/dynamixel/dynamixel_wizard2/>`_，然後把馬達連結到電腦。
 2.  根據 :ref:`assembly_manual` 那個 for toddlerbot 1.0 的 PDF，
 
     *   要把 baudrate 設定成 2 Mbps。
@@ -27,41 +23,24 @@ Q: 要把 Dynamixel 馬達插到筆電上設定，要怎麽供電？
 --------------------------------------------
 *   Ref: `(YouTube) How To: Connect power to U2D2 Power Hub Board for DYNAMIXEL <https://www.youtube.com/watch?v=FIj_NULYOKQ>`_
 *   使用 U2D2（有透明塑膠殼），然後把 U2D2 插到 U2D2 Power Hub 上。
+
     *   Power Hub 吃 12V 電壓輸入，我們用了 iMax B6 Mini 電池充電器隨附的變壓器供電。
 
-馬達歸零校正 (Motor Calibration)
---------------------------------
 
-腳本 ``toddlerbot/tools/calibrate_zero.py`` 是用於組裝完成後的 **軟體歸零校正 (Software Zero-point Calibration)** 以調整些微誤差，**並不是** 用來初始化所有馬達 ID 的。
-
-常見問題與解決方案
+其他常見問題與解決方案
 ------------------
 
-1. 螺絲過大與公差問題
+1. 3D 列印孔洞大小與公差問題
 ~~~~~~~~~~~~~~~~~~~~~
 
-*   **問題**：Leg/Hip Assembly 的螺絲頭可能過大，無法放入 3D 列印件的孔洞中。
+*   **問題**：如果運氣不好，買到的螺絲頭可能過大，無法放入 3D 列印件的孔洞中。或者列印時有公差，也可能是 Bearing 塞不進去的原因。
 *   **解決方案**：
+
     *   嘗試改用 Dynamixel 馬達隨附的螺絲，它們的頭通常較小。
     *   若是 3D 列印公差導致孔洞過小，可以使用打火機稍微加熱螺絲（注意通風與配戴口罩），利用熱熔方式擠入。
     *   若誤差過大，請重新列印。
 
-2. 散熱膏缺件
-~~~~~~~~~~~~~
-
-*   **問題**：將 Jetson Orin NX 模組轉移至 DevKit 時發現缺少散熱膏。
-*   **解決方案**：建議購買 **PTM7950 0.25mm 相變導熱膠**。舊的散熱膏可用 75% 酒精擦拭清潔（建議使用不掉屑的拭紙）。
-
-3. JST-EH 線材方向錯誤
-~~~~~~~~~~~~~~~~~~~~~~
-
-*   **問題**：市售加長版 JST-EH 線材的腳位順序可能與 Dynamixel 不符（例如 1-2-3 對應到另一端的 3-2-1）。
-*   **解決方案**：需要手動退 Pin 重插。
-    1.  固定住線材與端子。
-    2.  使用細的一字起子輕輕挑起塑膠卡榫，同時將線拉出。
-    3.  依照正確順序 (1對1, 2對2, 3對3) 重新插入。
-
-4. U2D2 供電
+2. U2D2 供電
 ~~~~~~~~~~~~
 
 *   **問題**：要在設定馬達與組裝時為馬達供電。

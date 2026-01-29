@@ -9,7 +9,7 @@
 前情提要
 --------
 
-官方 BOM 表上要我們購買 JST-EH Cable 與 JST-EH Housing（塑膠殼）。但為了一條 3-pin 的 JST-EH 加長線花臺幣 40 元左右不合成本，所以我試著買了 [已經壓好的線]( https://item.taobao.com/item.htm?spm=tbpc.boughtlist.suborder_itemtitle.1.4f042e8dWKZ1rw&id=836918236262&mi_id=0000tZcB8VwUKXtTJHIoAc6yD3BiWi1BaVFyF69piPlywUY )。
+官方 BOM 表上要我們購買 JST-EH Cable 與 JST-EH Housing（塑膠殼）。但為了一條 3-pin 的 JST-EH 加長線花臺幣 40 元左右不合成本，所以我試著買了 `已經壓好的線 <https://item.taobao.com/item.htm?spm=tbpc.boughtlist.suborder_itemtitle.1.4f042e8dWKZ1rw&id=836918236262&mi_id=0000tZcB8VwUKXtTJHIoAc6yD3BiWi1BaVFyF69piPlywUY>`_。
     
 .. raw:: html
 
