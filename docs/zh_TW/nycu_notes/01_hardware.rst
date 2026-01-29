@@ -72,4 +72,5 @@ Q: 要把 Dynamixel 馬達插到筆電上設定，要怎麽供電？
    :caption: 詳細組裝紀錄
 
    hardware_notes/2026_01_23_Jetson_Assembly
+   hardware_notes/2026_01_29_JST_EH_wrong_wiring
 
