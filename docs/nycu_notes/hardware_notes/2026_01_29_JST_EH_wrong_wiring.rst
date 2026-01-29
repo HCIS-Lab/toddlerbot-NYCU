@@ -1,6 +1,7 @@
 ..
    :sync_target: ../../zh_TW/nycu_notes/hardware_notes/2026_01_29_JST_EH_wrong_wiring.rst
-   :sync_hash: 63186868186476e37b5ca2613ed74af1a67aaa9e
+   :sync_hash: caf7213519c96c727b407b2c38673daf505409ba
+
 
 .. _2026_01_29_JST_EH_wrong_wiring_en:
 
@@ -18,7 +19,8 @@ This document records the process of fixing the JST-EH extension cable wiring er
 Background
 ----------
 
-The official BOM requires us to purchase JST-EH Cables and Housings. However, spending around 40 TWD for a single 3-pin JST-EH extension cable is not cost-effective, so I tried purchasing [pre-crimped wires]( https://item.taobao.com/item.htm?spm=tbpc.boughtlist.suborder_itemtitle.1.4f042e8dWKZ1rw&id=836918236262&mi_id=0000tZcB8VwUKXtTJHIoAc6yD3BiWi1BaVFyF69piPlywUY ).
+The official BOM requires us to purchase JST-EH Cables and Housings. However, spending around 40 TWD for a single 3-pin JST-EH extension cable is not cost-effective, so I tried purchasing `pre-crimped wires <https://item.taobao.com/item.htm?spm=tbpc.boughtlist.suborder_itemtitle.1.4f042e8dWKZ1rw&id=836918236262&mi_id=0000tZcB8VwUKXtTJHIoAc6yD3BiWi1BaVFyF69piPlywUY>`_.
+
 
 .. raw:: html
 
