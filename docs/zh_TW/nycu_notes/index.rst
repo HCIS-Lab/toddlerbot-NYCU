@@ -14,3 +14,9 @@ NYCU 復刻筆記
 
    01_hardware
    02_software
+
+
+.. dropdown:: 本頁面貢獻記錄
+
+    *   操作者與撰寫者：潘仰祐 Kevin Pan（@XiaoPanPanKevinPan）
+

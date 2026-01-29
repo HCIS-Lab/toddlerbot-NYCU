@@ -112,7 +112,7 @@ ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國�
             <img src="../../../_static/jetson_som_fan_locked.jpg" style="flex: 15em; width: 15em;">
         </div>
 
-4.  將 SOM 的金手指插入載板。呈現斜斜的狀態是它的設計。
+4.  將 SOM 的金手指插入載板。固定前呈現上翹的狀態是它的設計。
 
     .. raw:: html
 
@@ -157,6 +157,10 @@ ToddlerBot 官方設計上，使用的是 reComputer J4012。但是由於我國�
             <img src="../../../_static/jetson_devkit_assembled_3.jpg" style="flex: 15em; width: 15em;">
             <img src="../../../_static/jetson_devkit_assembled_4.jpg" style="flex: 15em; width: 15em;">
         </div>
+
+.. dropdown:: 本頁面貢獻記錄
+
+    *   操作者與撰寫者：潘仰祐 Kevin Pan（@XiaoPanPanKevinPan）
 
 
 

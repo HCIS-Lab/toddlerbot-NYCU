@@ -5,7 +5,6 @@
 
 這份文件記錄了在 2026-01-20 ~ 2026-01-22 之間，為 Jetson Orin NX 灌系統的過程與踩坑紀錄。
 
-
 操作步驟
 --------
 
@@ -117,3 +116,8 @@ SSH 與後續 Setup
 *   **裝 Additional Packages**
 
     *   最後面在 “Add TensorRT to Python path:” 的時候，如果沒有 ``$CONDA_PREFIX`` 這個變數，就直接去 ``~/miniforge3/envs/toddlerbot`` 尋找
+
+
+.. dropdown:: 本頁面貢獻記錄
+
+    *   操作者與撰寫者：潘仰祐 Kevin Pan（@XiaoPanPanKevinPan）
