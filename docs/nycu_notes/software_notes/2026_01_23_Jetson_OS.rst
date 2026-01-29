@@ -1,4 +1,10 @@
+..
+   :sync_target: ../../zh_TW/nycu_notes/software_notes/2026_01_23_Jetson_OS.rst
+   :sync_hash: 5695360197eb5c1f231e48fc986ade92afe677de
+
+
 .. _2026_01_23_Jetson_OS_en:
+
 
 2026-01-23 Jetson OS Installation Log
 =====================================
@@ -113,3 +119,7 @@ Continue from Step 8 of "Flash the System" in :ref:`jetson_orin` (SSH, RT Kernel
 *   **Additional Packages**
 
     *   For TensorRT path: check ``~/miniforge3/envs/toddlerbot`` if ``$CONDA_PREFIX`` is missing.
+
+.. dropdown:: Contribution Log
+
+    *   Operator & Author: Kevin Pan (@XiaoPanPanKevinPan)

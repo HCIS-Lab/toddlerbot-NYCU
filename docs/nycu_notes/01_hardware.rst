@@ -1,4 +1,9 @@
+..
+   :sync_target: ../zh_TW/nycu_notes/01_hardware.rst
+   :sync_hash: be2e89a07d99fdbde6fe0f569c5ed9d175937ff6
+
 .. _nycu_notes_hardware_en:
+
 
 Hardware Notes
 ==============

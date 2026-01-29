@@ -1,4 +1,10 @@
+..
+   :sync_target: ../../zh_TW/nycu_notes/hardware_notes/2026_01_23_Jetson_Assembly.rst
+   :sync_hash: 5695360197eb5c1f231e48fc986ade92afe677de
+
+
 .. _2026_01_23_Jetson_Assembly_en:
+
 
 2026-01-23 Jetson Assembly Log
 ==============================
@@ -110,7 +116,8 @@ Assembly Process
             <img src="../../_static/jetson_som_fan_locked.jpg" style="flex: 15em; width: 15em;">
         </div>
 
-4.  Insert the SOM's gold fingers into the carrier board. It is designed to sit diagonally.
+4.  Insert the SOM's gold fingers into the carrier board. It is designed to tilt upwards before fixing.
+
 
     .. raw:: html
 
@@ -147,11 +154,15 @@ Assembly Process
     .. raw:: html
 
         <div style="display: flex; flex-flow: row wrap; justify-content: space-around;">
-            <img src="../../../_static/jetson_devkit_assembled_1.jpg" style="flex: 15em; width: 15em;">
-            <img src="../../../_static/jetson_devkit_assembled_2.jpg" style="flex: 15em; width: 15em;">
+            <img src="../../_static/jetson_devkit_assembled_1.jpg" style="flex: 15em; width: 15em;">
+            <img src="../../_static/jetson_devkit_assembled_2.jpg" style="flex: 15em; width: 15em;">
         </div>
 
         <div style="display: flex; flex-flow: row wrap; justify-content: space-around;">
-            <img src="../../../_static/jetson_devkit_assembled_3.jpg" style="flex: 15em; width: 15em;">
-            <img src="../../../_static/jetson_devkit_assembled_4.jpg" style="flex: 15em; width: 15em;">
+            <img src="../../_static/jetson_devkit_assembled_3.jpg" style="flex: 15em; width: 15em;">
+            <img src="../../_static/jetson_devkit_assembled_4.jpg" style="flex: 15em; width: 15em;">
         </div>
+
+.. dropdown:: Contribution Log
+
+    *   Operator & Author: Kevin Pan (@XiaoPanPanKevinPan)

@@ -1,4 +1,10 @@
+..
+   :sync_target: ../zh_TW/nycu_notes/index.rst
+   :sync_hash: 5695360197eb5c1f231e48fc986ade92afe677de
+
+
 .. _nycu_notes_index_en:
+
 
 NYCU Reproduction Notes
 =======================
@@ -18,3 +24,7 @@ This section records the challenges, solutions, and local modifications encounte
 
    01_hardware
    02_software
+
+.. dropdown:: Contribution Log
+
+    *   Operator & Author: Kevin Pan (@XiaoPanPanKevinPan)

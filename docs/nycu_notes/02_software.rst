@@ -1,4 +1,9 @@
+..
+   :sync_target: ../zh_TW/nycu_notes/02_software.rst
+   :sync_hash: db721a9b41357809c6c1c6bc88c48a40acb98db6
+
 .. _nycu_notes_software_en:
+
 
 Software Notes
 ==============
