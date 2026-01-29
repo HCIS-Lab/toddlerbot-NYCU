@@ -1,6 +1,7 @@
 ..
    :sync_target: ../zh_TW/nycu_notes/01_hardware.rst
-   :sync_hash: be2e89a07d99fdbde6fe0f569c5ed9d175937ff6
+   :sync_hash: 63186868186476e37b5ca2613ed74af1a67aaa9e
+
 
 .. _nycu_notes_hardware_en:
 
@@ -77,3 +78,4 @@ Common Issues and Solutions
    :caption: Detailed Assembly Logs
 
    hardware_notes/2026_01_23_Jetson_Assembly
+   hardware_notes/2026_01_29_JST_EH_wrong_wiring
