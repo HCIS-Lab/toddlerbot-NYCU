@@ -86,9 +86,11 @@ class IMU:
 
         # Enable the gyroscope and rotation vector features
         # self.sensor.enable_feature(BNO_REPORT_GRAVITY)
-        self.sensor.enable_feature(BNO_REPORT_GYROSCOPE)
+        #self.sensor.enable_feature(BNO_REPORT_GYROSCOPE)
+        self.enable_feature_with_retry(BNO_REPORT_GYROSCOPE, "Gyroscope")
         # self.sensor.enable_feature(BNO_REPORT_LINEAR_ACCELERATION)
-        self.sensor.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+        #self.sensor.enable_feature(BNO_REPORT_ROTATION_VECTOR)
+        self.enable_feature_with_retry(BNO_REPORT_ROTATION_VECTOR, "Rotation Vector")
 
         time.sleep(0.2)
 
@@ -97,6 +99,18 @@ class IMU:
         zero_euler = np.array([0, -np.pi / 2, 0], dtype=np.float32)
         self.zero_rot = R.from_euler("xyz", zero_euler)
         self.zero_rot_inv = self.zero_rot.inv()
+
+    def enable_feature_with_retry(self, feature, feature_name, max_retries=10):
+        for attempt in range(max_retries):
+            try:
+                self.sensor.enable_feature(feature)
+                print(f"[*] Successfully enabled {feature_name}")
+                return
+            except (RuntimeError, ValueError) as e:
+                print(f"[!] Attempt {attempt + 1} failed for {feature_name}: {e}. Retrying...")
+                time.sleep(0.2)
+                
+        raise RuntimeError(f"[ERROR] Failed to enable {feature_name} after {max_retries} attempts.")
 
     # @profile()
     def get_state(self):
