@@ -129,6 +129,11 @@ if __name__ == "__main__":
         pass
 
     finally:
+        if args.plot and len(times) > 0:
+            # Save the current figure
+            filename = f"imu_test_{int(time.time())}.png"
+            plt.savefig(filename)
+            print(f"Figure is saved to: {filename}")
         # from toddlerbot.utils.misc_utils import dump_profiling_data
 
         # dump_profiling_data()
