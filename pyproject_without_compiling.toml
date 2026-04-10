@@ -1,0 +1,86 @@
+[build-system]
+#requires = ["scikit-build-core", "pybind11"]
+#build-backend = "scikit_build_core.build"
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+
+[project]
+name = "toddlerbot"
+version = "0.2.0"
+description = "The software stack of ToddlerBot."
+authors = [
+    { name = "Haochen Shi", email = "hshi74@stanford.edu" },
+    { name = "Weizhuo Wang", email = "weizhuo2@stanford.edu" }
+]
+readme = "README.md"
+requires-python = ">=3.10"
+# license = { text = "MIT" }
+
+dependencies = [
+    "adafruit-circuitpython-bno08x",
+    "brax",
+    "cmaes",
+    "colorama",
+    "control==0.9.4",
+    "diffusers==0.30.3",
+    "gdown",
+    "gin-config",
+    "jax==0.4.28",
+    "jaxlib==0.4.28",
+    "joblib",
+    "line_profiler",
+    "lz4",
+    "loop-rate-limiters",
+    "matplotlib",
+    "mediapy",
+    "mink",
+    "moviepy==1.0.3",
+    "mujoco==3.3.4",
+    "mujoco-mjx==3.3.4",
+    "mypy",
+    "numpy==1.26.4",
+    "onnxruntime",
+    "onshape-to-robot==1.7.2",
+    "open3d",
+    "openai[realtime]",
+    "opencv-python==4.9.0.80",
+    "optuna",
+    "optuna-dashboard",
+    "psycopg2-binary",
+    "pupil_apriltags",
+    "pybullet",
+    "pygame",
+    "pytest",
+    "pyserial",
+    "PySide6",
+    "rsl-rl-lib==2.3.3",
+    "scipy",
+    "seaborn",
+    "setuptools==75.6.0",
+    "sounddevice", 
+    "soxr",
+    "textual",
+    "tqdm",
+    "wandb",
+    "zmq"
+]
+
+[project.optional-dependencies]
+docs = ["sphinx", "sphinx-tabs", "sphinx-design", "sphinx-autobuild", "furo"]
+test = ["torch==2.3.1", "torchvision==0.18.1"]
+linux = ["jax[cuda12]==0.4.28", "pynput", "tensorboard", "torch==2.3.1", "torchvision==0.18.1"]
+macos = ["torch==2.3.1", "torchvision==0.18.1"]
+windows = ["torch==2.3.1", "torchvision==0.18.1"]
+jetson = ["Jetson.GPIO", "pyaudio", "pydub"]
+
+#[tool.scikit-build]
+#wheel.packages = ["toddlerbot"]  # builds C++ extensions into this package
+#build.verbose = true             # optional, for debugging
+[tool.setuptools]
+packages = ["toddlerbot"]
+
+
+[tool.sphinx]
+build-dir = "docs/_build"
+source-dir = "docs"
